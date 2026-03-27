@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>labels</id>
+    <version>1.0</version>
+    <priority>100</priority>
+    <status>active</status>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <settings edition_type="ROOT,ULT:VENDOR">
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="labels_for_products">
+                        <type>checkbox</type>
+                        <default_value>Y</default_value>
+                    </item>
+                    <item id="labels_for_pages">
+                        <type>checkbox</type>
+                        <default_value>Y</default_value>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+    <queries>
+        <item for="demo" type="file">database/demo.sql</item>
+        <item>DROP TABLE IF EXISTS ?:labels;</item>
+        <item>DROP TABLE IF EXISTS ?:labels_material;</item>
+        <item>DROP TABLE IF EXISTS ?:labels_form;</item>
+        <item>
+            CREATE TABLE '?:labels_material' (
+                `labels_material_id` mediumint(8) unsigned NOT NULL auto_increment,
+                `labels_material_name` varchar(255) NOT NULL default '',
+                PRIMARY KEY (labels_material_id)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        </item>
+        <item>
+            CREATE TABLE '?:labels_form' (
+                `labels_form_id` mediumint(8) unsigned NOT NULL auto_increment,
+                `labels_form_name` varchar(255) NOT NULL default '',
+                PRIMARY KEY (labels_form_id)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        </item>
+        <item>
+            CREATE TABLE `?:labels` (
+                `label_id` mediumint(8) unsigned NOT NULL auto_increment,
+                `label_name` varchar(100) NOT NULL default '',
+                `label_desc` varchar(255) NOT NULL default '',
+                `label_length` int(11) NOT NULL default '0',
+                `label_width` int(11) NOT NULL default '0',
+                `label_material_id` mediumint(8) NOT NULL default '0',
+                `label_form_id` mediumint(8) NOT NULL default '0',
+                PRIMARY KEY  (`label_id`),
+                UNIQUE KEY `uniq_label_name` (`label_name`)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:labels;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:labels_material;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:labels_form;</item>
+    </queries>
+</addon>
