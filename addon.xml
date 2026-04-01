@@ -27,14 +27,14 @@
         <item>DROP TABLE IF EXISTS ?:labels_material;</item>
         <item>DROP TABLE IF EXISTS ?:labels_form;</item>
         <item>
-            CREATE TABLE '?:labels_material' (
+            CREATE TABLE `?:labels_material` (
                 `labels_material_id` mediumint(8) unsigned NOT NULL auto_increment,
                 `labels_material_name` varchar(255) NOT NULL default '',
                 PRIMARY KEY (labels_material_id)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         </item>
         <item>
-            CREATE TABLE '?:labels_form' (
+            CREATE TABLE `?:labels_form` (
                 `labels_form_id` mediumint(8) unsigned NOT NULL auto_increment,
                 `labels_form_name` varchar(255) NOT NULL default '',
                 PRIMARY KEY (labels_form_id)
