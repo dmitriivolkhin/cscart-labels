@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<addon scheme="3.0">
+<addon scheme="4.0">
     <id>labels</id>
     <version>1.0</version>
     <priority>100</priority>
@@ -23,24 +23,25 @@
     </settings>
     <queries>
         <item for="demo" type="file">database/demo.sql</item>
-        <item>DROP TABLE IF EXISTS ?:labels;</item>
-        <item>DROP TABLE IF EXISTS ?:labels_material;</item>
-        <item>DROP TABLE IF EXISTS ?:labels_form;</item>
-        <item>
+        <item for="install">DROP TABLE IF EXISTS ?:labels;</item>
+        <item for="install">DROP TABLE IF EXISTS ?:labels_material;</item>
+        <item for="install">DROP TABLE IF EXISTS ?:labels_form;</item>
+        <item for="install">DROP TABLE IF EXISTS ?:labels_products;</item>
+        <item for="install">
             CREATE TABLE `?:labels_material` (
                 `labels_material_id` mediumint(8) unsigned NOT NULL auto_increment,
                 `labels_material_name` varchar(255) NOT NULL default '',
                 PRIMARY KEY (labels_material_id)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         </item>
-        <item>
+        <item for="install">
             CREATE TABLE `?:labels_form` (
                 `labels_form_id` mediumint(8) unsigned NOT NULL auto_increment,
                 `labels_form_name` varchar(255) NOT NULL default '',
                 PRIMARY KEY (labels_form_id)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         </item>
-        <item>
+        <item for="install">
             CREATE TABLE `?:labels` (
                 `label_id` mediumint(8) unsigned NOT NULL auto_increment,
                 `label_name` varchar(100) NOT NULL default '',
@@ -53,8 +54,15 @@
                 UNIQUE KEY `uniq_label_name` (`label_name`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         </item>
+        <item for="install">
+            CREATE TABLE `?:labels_products` (
+                product_id INT UNSIGNED PRIMARY KEY,
+                allow_labels CHAR(1) NOT NULL DEFAULT 'N'
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        </item>
         <item for="uninstall">DROP TABLE IF EXISTS ?:labels;</item>
         <item for="uninstall">DROP TABLE IF EXISTS ?:labels_material;</item>
         <item for="uninstall">DROP TABLE IF EXISTS ?:labels_form;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:labels_products;</item>
     </queries>
 </addon>
